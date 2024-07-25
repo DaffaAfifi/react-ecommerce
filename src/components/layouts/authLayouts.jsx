@@ -1,10 +1,24 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { DarkMode } from "../../context/darkMode";
 
 const AuthLayout = (props) => {
   const { children, title } = props;
+  const { darkMode, setDarkMode } = useContext(DarkMode);
+
   return (
-    <div className="flex justify-center min-h-screen items-center">
+    <div
+      className={`flex justify-center items-center h-screen ${
+        darkMode ? "bg-slate-900" : "bg-slate-50"
+      }`}
+    >
       <div className="w-full max-w-xs">
+        <button
+          className="absolute top-2 right-2 p-2 text-white rounded bg-blue-600"
+          onClick={() => setDarkMode(!darkMode)}
+        >
+          {darkMode ? "Light" : "Dark"}
+        </button>
         <h1 className="text-3xl font-bold mb-2 text-blue-600">{title}</h1>
         <p className="font-medium text-slate-500 mb-8">
           Welcome, please enter your details
